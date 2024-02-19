@@ -38,7 +38,9 @@ const AudioPlayer = ({ playlist }) => {
     const handleTimeUpdate = () => {
         setCurrentTime(audioRef.current.currentTime);
     };
-
+    const handleAudioError = (error) => {
+        console.error('Audio playback error:', error);
+    };
     if (playlist.length === 0 || currentTrackIndex >= playlist.length) {
         return <div>No tracks available</div>;
     }
@@ -51,6 +53,7 @@ const AudioPlayer = ({ playlist }) => {
                 controls
                 onEnded={handleAudioEnded}
                 onTimeUpdate={handleTimeUpdate}
+                onError={handleAudioError}
                 src={playlist[currentTrackIndex].url}
             >
                 Your browser does not support the audio element.
