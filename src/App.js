@@ -17,7 +17,7 @@ const App = () => {
   };
 
   const resetHandler = () => {
-    setPlaylist([]);
+    setPlaylist([])
   };
 
   return (
