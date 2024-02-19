@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import AudioPlayer from './components/AudioPlayer';
-
+import AudioPlayer from './components/AudioPlayer/AudioPlayer';
+import Playlist from './components/Playlist/Playlist';
 
 const App = () => {
   const [playlist, setPlaylist] = useState([
@@ -16,7 +16,7 @@ const App = () => {
   return (
     <div className="App">
       <AudioPlayer playlist={playlist} />
-
+      <Playlist playlist={playlist} />
       <input
         type="file"
         accept="audio/*"
