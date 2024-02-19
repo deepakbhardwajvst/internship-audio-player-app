@@ -36,8 +36,11 @@ const AudioPlayer = ({ playlist }) => {
     };
 
     const handleTimeUpdate = () => {
-        setCurrentTime(audioRef.current.currentTime);
+        if (audioRef.current) {
+            setCurrentTime(audioRef.current.currentTime);
+        }
     };
+
     const handleAudioError = (error) => {
         console.error('Audio playback error:', error);
     };
