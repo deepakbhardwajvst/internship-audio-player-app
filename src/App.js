@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import AudioPlayer from './components/AudioPlayer/AudioPlayer';
-import Playlist from './components/Playlist/Playlist';
 
 const App = () => {
   const [playlist, setPlaylist] = useState(() => {
     const storedPlaylist = localStorage.getItem('playlist');
-    return storedPlaylist ? JSON.parse(storedPlaylist) : [];
+    return JSON.parse(storedPlaylist);
   });
 
   useEffect(() => {
@@ -15,11 +14,13 @@ const App = () => {
   const addNewTrack = (newTrack) => {
     setPlaylist([...playlist, newTrack]);
   };
+  const resetHandler = (newTrack) => {
+    setPlaylist("");
+  };
 
   return (
     <div className="App">
       <AudioPlayer playlist={playlist} />
-      <Playlist playlist={playlist} />
       <input
         type="file"
         accept="audio/*"
@@ -30,6 +31,7 @@ const App = () => {
           addNewTrack(newTrack);
         }}
       />
+      <button onClick={resetHandler}>reset</button>
     </div>
   );
 };
