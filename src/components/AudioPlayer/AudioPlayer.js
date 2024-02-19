@@ -46,8 +46,8 @@ const AudioPlayer = ({ playlist }) => {
     }
 
     return (
-        <div>
-            <h2>Now Playing: {playlist[currentTrackIndex].name}</h2>
+        <div className="audio-player-container">
+            <h2 className="now-playing">Now Playing: {playlist[currentTrackIndex].name}</h2>
             <audio
                 ref={audioRef}
                 controls
@@ -55,17 +55,21 @@ const AudioPlayer = ({ playlist }) => {
                 onTimeUpdate={handleTimeUpdate}
                 onError={handleAudioError}
                 src={playlist[currentTrackIndex].url}
+                className="audio-element"
             >
                 Your browser does not support the audio element.
             </audio>
-            <ul>
+            <ul className="playlist">
                 {playlist.map((track, index) => (
-                    <li key={index} onClick={() => playSelectedTrack(index)}>
-                        {track.name}
+                    <li key={index} onClick={() => playSelectedTrack(index)} className="playlist-item">
+                        <div className="track-info">
+                            <span className="track-name">{track.name}</span>
+                        </div>
                     </li>
                 ))}
             </ul>
         </div>
+
     );
 };
 
