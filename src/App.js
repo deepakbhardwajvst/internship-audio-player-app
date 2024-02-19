@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import AudioPlayer from './components/AudioPlayer';
 
-function App() {
+
+const App = () => {
+  const [playlist, setPlaylist] = useState([
+    { name: 'Track 1', url: '/track1.mp3' },
+    { name: 'Track 2', url: '/track2.mp3' },
+
+  ]);
+
+  const addNewTrack = (newTrack) => {
+    setPlaylist([...playlist, newTrack]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AudioPlayer playlist={playlist} />
+
+      <input
+        type="file"
+        accept="audio/*"
+        onChange={(e) => {
+          const file = e.target.files[0];
+          const newTrack = { name: file.name, url: URL.createObjectURL(file) };
+          addNewTrack(newTrack);
+        }}
+      />
     </div>
   );
-}
+};
 
 export default App;
